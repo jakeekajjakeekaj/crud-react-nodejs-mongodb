@@ -14,3 +14,8 @@
 // + MySQL: Ideal para la parte de transacciones y gestión de usuarios donde la integridad de los datos es crítica.
 
 // En resumen, la elección depende de tus necesidades específicas y del tipo de operaciones que priorizas. Muchos grandes e-commerce utilizan una combinación de diferentes tecnologías de bases de datos para aprovechar las fortalezas de cada una.
+
+// Listo, ahora creamos una carpeta src, aparte de agregar el .gitignore, el README, y subir el proy a github; ahora creamos un proyecto npm, con "npm init", al crearlo y ya tener nuestro package.json podemos instalar las librerías, para este caso sería "npm i express"
+
+// Una vez finalizado creamos nuestro app.js dentro de src
+// Una vez finalizado este paso, ya creando de manera breve nuestro server express dentro de app.js y a su vez modificando nuestro package.json con "type" : "module" para así evitar usar el require; podemos ejecutar nuestro servidor con node src/app.js
