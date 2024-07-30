@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -17,6 +17,9 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   }
+}, {
+  // Sirve para indicar la fehca y hora en que fue creada y actualizada
+  timestamps: true
 });
 
 // de esa manera al crear el mongoose.model estamos creando ahora sí nuestro modelado, es decir lo de arriba únicamente indica cómo es que se verá nuestro esquema, pero todavía no seremos capaces de crear consultas ni nada por el estilo, pero gracias a mongoose ahora sí nosotros definimos por ejemplo User, y lo que hará es que creará modelos users tomando en cuenta la estructura que indicamos para ahora sí poder realizar las respectivas consultas
