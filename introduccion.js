@@ -112,3 +112,16 @@
 // Ahora solo mejoraremos la organización, crearemos un nuevo archivo dentro de la carpeta libs llamado jwt.js, ahí pegaremos todo lo del json web token para así mandarlo a llamar a través de una importación y dentro del auth.controller solamente mandar la cookie; así mismo dentro del archivo config.js alojado en nuestro src, colocaremos el valor de la FIRMA (PALABRA CLAVE) para que así se use como variable y no poder ser modificable en el jwt.js
 
 // --------- LOGIN -------------
+// Para el login se hace la respectiva función dentro de auth.controller, así mismo en esta sección se mejoró a nuestro createAccessToken del jwt.js dentro de libs para generar de manera correcta los tokens; y se agregó la ruta de login dentro de auth.routes.js contenido en la carpeta de routes
+
+// ----------- LOGOUT -----------
+// El mismo proceso para el LOGIN se hace dentro del 
+
+// ---------- VALIDAR TOKEN ----------
+// Para esto se crea la ruta en auth.routes, después de esto se crea en middlewares con nuevo archivo llamado validateToken.js, esto porque primero pasará por una función de validación antes de la función "buena", dicho esto dentro del validateToken para poder estar trabajando con el respectivo token, debemos trabajar con las cookies, y es por esto que también tenemos que instalar una nueva librería: "npm i cookie-parser"
+
+// Una vez que ya se pueda leer la cookie, ahora si ya podemos proceder con el token, para así acabar de crear nuestra función profile junto con su enrutamiento; al finalizar esto podemos hacer las pruebas, estas son primero logearnos y ver que todo esté bien al pasar a ver el profile con GET, desoués nos ponemos en logout con POST y de esta manera ahora sí ya no quedará ningún token registrado, posterior a esto si colocamos nuevamente un porfile con GET ahora sí nos aparece que no se tiene ningún token y no es posible mostrar los datos correspondientes.
+
+// **** Ahora si nosotros queremos colocar nuevas rutas no hay ningún problema, lo que en este caso se hizo fue primero en la carpeta de routes se creó un nuevo archivo llamado tasks.routes.js, posterior a esto se crearon las corrspondientes instrucciones para así finalizar exportando la función e importarla dentro de nuestra app.js, de esta manera también mandamos a llamar a la función dentro del app.js, cabe mencionar que aquí también utilizamos la función de authRequired.js por lo que también tenemos que importar el authRequired de nuestro validateToken.js dentro de nuestra carpeta de middlewares, es así como al realizar una petición get con esta nueva ruta creada ahora para la task, no podremos acceder si no estamos logeados y así protegemos a nuestro backend ****
+
+// --------- TASKS CRUD ---------

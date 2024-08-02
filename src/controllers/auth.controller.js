@@ -55,7 +55,7 @@ export const register = async (req, res)=> {
 
     // res.send("Registrando...");
     // Muestra todo el usuario (contraseña, id, etc.)
-    res.json(userSaved);
+    // res.json(userSaved);
     res.json({
       id: userSaved._id,
       username: userSaved.username,
@@ -69,7 +69,10 @@ export const register = async (req, res)=> {
   }
 }
 
+// Estructura similar a register
+
 export const login = async (req, res)=> {
+
   const { email, password } = req.body;
 
   try {
@@ -78,33 +81,54 @@ export const login = async (req, res)=> {
 
     if(!userFound) return res.status(400).json({ message: "User not found" });
 
-    const passwordHash = await bcrypt.hash(password, 10);
+    // const passwordHash = await bcrypt.hash(password, 10);
+    const isMatch = await bcrypt.compare(password, userFound.password);
 
-    const newUser = new User({
-      username,
-      email,
-      password: passwordHash,
-    });
-    const userSaved = await newUser.save();
-    const token = await createAccessToken({id: userSaved._id})
+    if(!isMatch) return res.status(400).json({ message: "Incorrect password" });
+
+    const token = await createAccessToken({id: userFound._id})
 
     res.cookie('token', token);
+    console.log(token);
     // res.json({
     //   message: "User created successfully",
     // });
 
     // res.send("Registrando...");
     // Muestra todo el usuario (contraseña, id, etc.)
-    res.json(userSaved);
+    // res.json(userSaved);
     res.json({
-      id: userSaved._id,
-      username: userSaved.username,
-      email: userSaved.email,
-      createdAt: userSaved.createdAt,
-      updatedAt: userSaved.updatedAt,
+      id: userFound._id,
+      username: userFound.username,
+      email: userFound.email,
+      createdAt: userFound.createdAt,
+      updatedAt: userFound.updatedAt,
     });
   } catch (error) {
   // console.log(error);
   res.status(500).json({ message: error.message });
   }
+}
+
+export const logout = async (req, res)=> {
+  res.cookie('token', "", {
+    expires: new Date(0)
+  });
+  return res.sendStatus(200);
+}
+
+export const profile = async (req, res)=> {
+  // console.log(req.user);
+  const userFound = await User.findById(req.user.id)
+
+  if(!userFound) return res.status(400).json({ message: "User not found" });
+
+  return res.json({
+    id: userFound._id,
+    username: userFound.username,
+    email: userFound.email,
+    createdAt: userFound.createdAt,
+    updatedAt: userFound.updatedAt,
+  });
+  res.send('profile');
 }
