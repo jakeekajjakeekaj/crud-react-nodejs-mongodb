@@ -125,3 +125,27 @@
 // **** Ahora si nosotros queremos colocar nuevas rutas no hay ningún problema, lo que en este caso se hizo fue primero en la carpeta de routes se creó un nuevo archivo llamado tasks.routes.js, posterior a esto se crearon las corrspondientes instrucciones para así finalizar exportando la función e importarla dentro de nuestra app.js, de esta manera también mandamos a llamar a la función dentro del app.js, cabe mencionar que aquí también utilizamos la función de authRequired.js por lo que también tenemos que importar el authRequired de nuestro validateToken.js dentro de nuestra carpeta de middlewares, es así como al realizar una petición get con esta nueva ruta creada ahora para la task, no podremos acceder si no estamos logeados y así protegemos a nuestro backend ****
 
 // --------- TASKS CRUD ---------
+// Para emoezar dentro de la carpeta de routes creamos un archivo llamado tasks.routes.js, posterior a esto dentro de controllers también creamos un archivo llamado tasks.controller.js, posterior a esto dentro de models creamos un archivo llamado task.model.js y llenamos los archivos respectivamente; una vez definidas las rutas dentro del routes y las funciones dentro del controllers, ahora sí podemos probarlas, nos dirigimos a nuestro Thunder Client y dentro nos logeamos
+/*
+{
+  "email": "test11@example.com",
+  "password": "test11"
+}
+*/
+// y probamos con una petición GET .../api/tasks, con esto nos arrojará un areglo vacío pero vamos viendo que todo está funcionando, ahora sobre la misma ruta hacemos un POST y escribimos:
+/* 
+{
+  "title": "Mi primer tarea",
+  "description": "Descripcion 1"
+}
+*/
+// Y podemos observar que la tarea se ha creado, sin embargo hasta ahorita no tenemos linkeada la tarea creada con el usuario logeado, por lo que ahora haremos eso.
+
+// Para esto dentro del task.model agregaremos al user y escribimos el dato que es, no solo eso sino que ahora debemos dirigirnos a task.controller y en la newTask debemos agregar de igual manera al user, al acabar esto ahora si al elegir la misma ruta pero con el POST ahora sí se almacena en el respectivo usuario
+
+// Sin embargo ahora al hacer el GET de la ruta de tasks, nos trae todas las tareas en vez de únicamente las del usuario, dicho esto ahora lo que haremos es dentro de tasks.controller.js, en la función de getTasks y dentro de la función del Task.find, escribimos como parámetro user: req.user.id y así indicamos solo las tareas que correspondan con el usuario logeado. Ahora al indicar la ruta tasks con GET ahora sí solo nos trae las tareas del usuario correspondiente, agregamos el populate('user') en el tasks.controller y listo, ahora podemos viauslaizar las tareas correspondientes con el usuario y aparte visualizar la información del usuario gracias al populate
+
+// Ahora ya podemos probar todo y ver que ya todo está correcto, es decir para la eliminación, creación, edición y lectura de las tasks (CRUD), hasta aquí ya podemos proceder con el front, sin embargo procederemos con las validaciones.
+
+// -------- VALIDACIÓN DE DATOS --------
+
