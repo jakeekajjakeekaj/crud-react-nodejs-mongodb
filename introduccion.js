@@ -149,3 +149,52 @@
 
 // -------- VALIDACIÓN DE DATOS --------
 
+// En esta sección lo que se hará que validar los datos, es decir que cada que lleguen datos del lado del cliente, vamos a compararlos con un esquema que crearemos para así definir si es correcto o no lo que nos han pasado, para así deja continuar al cliente o por el contrario indicarle que hubo un error.
+
+// Para esto trabajaremos dentro de la carpeta Schemas, y a su vez utilizaremos biblioteas extras, ya que aunque se puee hacer manualmente con Node, ya existen muchas bibliotecas que nos ayudan a validar datos.
+// express-validator (módulo express para validar datos)
+// npm joi (Antes pertenecía a happy, un módulo alternativo a express, pero luego se dividió y ya es posible de usar con cualquier framework practicamente)
+// zod npm (nos permite crear una especie de esquema como con mongoose)
+
+// Para este caso utilizaremos zod npm, se recomienda entrar a la web y leer la documentación
+// npm i zod
+// y ahora dentro de schemas crearemos un archivo llamado auth.schema.js y dentro importamos zod
+
+// Ahora una vez acabados los esquemas, podremos mandar a llamar las funciones, una manera de hacerlo es que en controllers antes de que se haga el register por ejemplo, que siempre se pase primero por la validaión, el único problema es que esto se tendria que estar repitiendo para todas las direcciones, por lo que se creará un archivo en middlewares llamado validator.middleware.js y una vez declarado todo dentro de este, nos dirigimos a auth.routes.js e importamos tanto el validateSchema el middleware, como el registerSchema y loginSchema de los schemas, para así comenzar a trabajarlos en las rutas. De esta manera antes de ejcutar alguna función como register por ejemplo, primero llamaremos a nuestro middleware pasándole al esquema y si todo coincide básicamente verificando el req.body, ahora sí podremos interpretar que todo está correcto para proceder con el register o por el contrario manejar el error.
+
+// Procederemos a verificar que todo está crrecto, por lo que a través del THUNER CLIENT enviaremos un POST al register pero con el cuerpo vacío, si todo está correcto nos debería de arrojar un error de Zod bastante extenso, por esto mismo modificaremos el middleware para que en vez de que nos muestre error y nos aparezca todo, solo le indicaremos lo que deseamos; ahora ya nos aparecen los mensajes que deben de ir y procedemos a realizar validaciones, por ejemplo en el register si escribimos un email "123" nos indicará que el email es inválido, si colocamos bien el email pero no colocamos todo lo demás, nos indicará que se requiren el username y la password, si solo escribimos un número, nos indicará que se espera un string, y lo mismo para la contraseña con su longitud.
+
+// Para el login el funcionamiento vendría siendo lo mismo
+
+// Ahora también se podría crear un esquema para las tareas, para esto nos dirigimos a los schemas y creamos el archivo task.schema.js, importamos ZOD y con esto creamos el esquema esperado para las validaciones, una vez finalizado ya nos dirigimos a nuestras routes con el tasks.routes.js y dentro ahora sí procedemos a importar al middleware y al esquema que acabamos de crear para las tareas, una vez que lo mandamos a llamar podemos probarlo indicando la ruta tasks con POST y ahora sí, si no colocamos nada en el cuerpo, nos indicará que el título es requrido, lo mismo para el caso de la descripción, con esto finalizado se podría decir que ya terminamos el back, ahora procederemos con la configuración del cliente
+
+// ---------- CONFIGURACIÓN DEL CLIENTE ----------
+
+// Ahora comenzaremos con la configuración de lo que vendría siendo el cliente, es decir comenzaremos con el frontend
+
+// Para este caso utilizaremos VITE, por lo que escribimos "npm create vite", colocamos un nombre, para este caso elegimos "client", seleccionamos React, elegimos JavaScript.
+
+// Una vez creado entramos "cd client", ya dentro escribimos "npm install", después escribimos "npm run dev" para ejecutar el servidor y tmbién ejecutamos "npm run dev" dentro de client así como se indica en las instrucciones de la consola.
+
+// Ahora al abrir el navegador, si nosotros escribimos localhost:3000 podemos acceder a lo que sería el back, mientras que si escribimos localhost:5173 que es lo que se indica en la consola, podemos acceder al lado front
+
+// Ahora procederemos a limpiar un poco ya que se tiene código de ejemplo, para esta entramos a client y en App.jsx quitamos todo y agregamos un código básico, podemos eliminar el App.css ya que ya no se está utilizando más, de igual manera eliminamos todo el código de index.css y el main.jsx lo dejamos igual.
+
+// Ahora para este caso, utilizaremos tailwind para el estilizado, por lo que nos dirigimos a la web y buscamos tailwind, entramos en getstartes, framework guides y seleccionamos la de Vite, ya dentro nos indicará la manera en que se instalará, para este caso hay que escribir en la consola del front, "npm install -D tailwindcss postcss autoprefixer", lo cual instalará a tailwind con estos 3 módulos, es decir tailwindcss, postcss y autoprefixer. Ahora escribimos en la consola "npx tailwindcss init -p" lo cual nos creará 2 nuevos archivos, un postcss.config.js y un tailwind.config.js
+// Ahora dentro de tailwind.config.js entramos y modificaremos el archivo, para este caso copiamos el content que viene en la documentación y lo pegamos, con eso lo que decimos es que cualquier archivo que esté dentro de index.html y src que trmine en js, ts, jsx y tsx va a poder tener la clase de tailwind; así mismo se recomienda tener la extención de tailwind para VSC llamada "Tailwind CSS IntelliSense" y es del mismo tailwind labs para así poder tener autocompletado.
+
+// Para finalizar en la misma docuemtnación nos indica que dentro del index.css agreguemos las clases indicadas, una vez pegado ya tenemos configurado tailwind, para probarlo podemos dentro de App.jsx escribimos el h1 con una className="text-4x1 font-bold" y al ver que efectivamente se modifica, podemos ver que efectivamente ya está instalado y bien configurado tailwind.
+
+// Ahora dentro del index.css escribimos un poco de más codigo en un body para así poder elegir el fondo del color y el color de letra.
+
+// Ya para finalizar se crearán varias páginas, para crear páginas en React generalmente se utiliza la bibliotecta React Router Dom, la cual sirve para simular el enrutado desde el frontend, por lo que nos metemos a su página, nos dirigimos en getting started y dentro de Tutorial buscamos cómo instalarlo, lo que nos indica que sería "npm i react-router-dom", una vez que lo instalamos a través de la consola, escribimos npm run dev nuevamente y ahora lo configuraremos
+
+// Dentro de App.jsx importamos el react-router-dom y escribimos código, de esta manera gracias a la previa instalación de ract router dom, ya podemos simular el enrutamiento en el lado del front y así al finalizar todo con la utilización rápida de BrowserRouter, Routes y Route; es así como al escribir las diferentes rutas en nuestra URL ahora si debería de estar cambiando el mensaje ya que eso fue lo que indicamos que debería de pasar.
+
+// ---------- REGISTRO DE USUARIOS ----------
+
+// Para esta parte nos dirigimos a src y creamos una carpeta llamada pages, otra llamada components y otra llamada context.
+
+// Dentro de pages crearemos un RegisterPage.jsx y también un LoginPage.jsx, una vez creados estos con un rfc (crear componentes React de forma predeterminada), lo que haremos srá dirigirnos a App.jsx y dentro importaremos e insertaremos los componentes en las rutas pertenecientes.
+
+// Ahora comenzaremos a crear el componente de RegisterPage.jsx, para este aparte de crear un componente utilizaremos una librería llamada "REACT HOOK FORM", esta nos ayudará a manejar los cambios de estado y las validaciones del laso del front y así nos evita tener uqe hacerlo todo; para su utilización tenemos que ir a la página principal, seleccionamos el get started y vemos las instrucciones de instalacón, para este caso escribimos en la consola "npm i react-hook-form". Una vez instalado ya podemos utilizarlo, ejecutamos el lado front e importamos el módulo dentro del componente RegisterPage.jsx. Al finalizar ya podemos comprobar su funcionamiento para la dirección de register y vemos que todo va correcto
