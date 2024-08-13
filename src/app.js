@@ -5,6 +5,7 @@ import morgan from 'morgan';
 
 // cookieParser es usado como middleware para poder acceder a la información de las cookies
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 // Importar el enrutamiento creado
 import authRoutes from './routes/auth.routes.js';
@@ -13,6 +14,11 @@ import taskRoutes from './routes/tasks.routes.js';
 
 // Inicialización de express, básicamente lo que sería const app vendría siendo nuestro server
 const app = express();
+
+// Es para le manejo del CORS, como con el corsOptions, solo que este se conecta de forma sencilla y directa, admitiendo todo de este dominio, sin embargo es malo si queremos seguridad en nuestro CORS ya que esto al ser tan directo y sencillo, puede tener ciertas complicaicones de seguridad
+app.use(cors({
+  origin: 'http://localhost:5173',
+}));
 
 // la configuración 'dev' es para que nos muestre un mensaje corto por consola
 app.use(morgan('dev'));

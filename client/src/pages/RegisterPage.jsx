@@ -5,15 +5,19 @@ import { useForm } from 'react-hook-form';
 
 export default function RegisterPage() {
 
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = handleSubmit(async (values)=> {
+    
+  })
 
   return (
     <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
       {/* // <div>RegisterPage</div>
       // Se puedes manejar los eventos del formulario, para que cuando el usuario tipee se guarde en un estado o las propias validaciones del front, sin embargo ya existen librerías que se encargan de eso y nos evita tener que hacer todo por nuestra cuenta, para este caso utiizaremos un módulo llamado 'react hook form', el cuál se encarga de decirle a react que tenemos un formulario que se encarga tanto de manejar el cambio de estado, como de validaciones */}
-      <form onSubmit={handleSubmit(values=> {
-        console.log(values);
-      })}>
+      <form 
+        onSubmit={onSubmit}
+      >
         {/* <input type="text" name='username' /> */}
         {/* '...' indica operador de progpagación, es decir que los atributos que tendrá la función se asignarán automáticamente, en vez de escribir todo de forma manual, es decir que para la función register se asigna automáticamente onChange, onBlur y ref
         'register' sería una función proporcionada por react hook form que se utiliza para registrar un campo de entrada, permitiendo el control del estado de campo, la validación y la recolección de datos 

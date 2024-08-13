@@ -198,3 +198,14 @@
 // Dentro de pages crearemos un RegisterPage.jsx y también un LoginPage.jsx, una vez creados estos con un rfc (crear componentes React de forma predeterminada), lo que haremos srá dirigirnos a App.jsx y dentro importaremos e insertaremos los componentes en las rutas pertenecientes.
 
 // Ahora comenzaremos a crear el componente de RegisterPage.jsx, para este aparte de crear un componente utilizaremos una librería llamada "REACT HOOK FORM", esta nos ayudará a manejar los cambios de estado y las validaciones del laso del front y así nos evita tener uqe hacerlo todo; para su utilización tenemos que ir a la página principal, seleccionamos el get started y vemos las instrucciones de instalacón, para este caso escribimos en la consola "npm i react-hook-form". Una vez instalado ya podemos utilizarlo, ejecutamos el lado front e importamos el módulo dentro del componente RegisterPage.jsx. Al finalizar ya podemos comprobar su funcionamiento para la dirección de register y vemos que todo va correcto
+
+// Hasta ahorita en la URL de register, nosotros ya podemos registrar y se muestra en consola, pero esto no registra en nuestra DB, para esto necesitamos usar peticiones para el backend utilizando Fetch, para este ejemplo como una manera más simple se usará Axios, aparte de que la mayor ventaja que tiene Fetch es que es ligero y más flexible, sin embargo en la mayoría de los casos se usará y es preferible usar Axios.
+// Para esto se instalará "npm i axios" dentro de client
+// Al tenerlo instalado ya podemos importarlo dentro de auth.js.
+// Una vez acabemos el código de auth.js y lo importemos dentro de RegisterPage.jsx, si nosotros intentamos realizar una petición tendremos un error, esto será por el CORS, dicho esto existen varias maneras de solucionarlo, lo que se hará para esta ocasión es ir al backend e instalaremos "npm i cors", este módulo nos permitirá configurar cors de forma sencilla, una vez finalizado lo importamos dentro de app.js y ahí dentro insertamos código, una vez listo ya podemos realizar peticiones.
+
+// Una vez mejorado un poco el código, se usará el contexto, el contexto vendría siendo un lugar en donde se quedará almacenada la información del usuario para poder estarla utilizando en varias secciones dentro de la misma página web, ya que muchas veces estaríamos utilizando al usuario en varias secciones de la página.
+
+// --------- CONTEXTO DE USUARIO ---------
+
+// Básicamente se guardarán los datos de autenticación del usuario, por lo que nos dirigiremos a la carpeta context y dentro crearemos un componente AuthContext.jsx y dentro del mismo insertaremos código
