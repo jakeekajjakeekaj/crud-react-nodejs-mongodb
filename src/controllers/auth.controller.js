@@ -35,6 +35,9 @@ export const register = async (req, res)=> {
   // O la otra manera es instanciando un objeto ESTA ES LA FORMA QUE SE UTILIZARÁ YA QUE NOS PERMITE CREAR EL OBJETO Y LUEGO ACCEDER A EL, lo que incluso lo hace la mejor opción
   try {
 
+    const userFound = await User.findOne({ email })
+    if (userFound) return res.status(400).json(["The email already exists"]);
+
     // hash sería el algoritmo para encriptar un arreglo de string, para este caso sería un método proveniente del propio bcrypt, en donde pasamos la contraseña (un string) y la cantidad de veces que este mismo se repetirá para la encriptación de la ocntraseña
     const passwordHash = await bcrypt.hash(password, 10);
 

@@ -208,4 +208,14 @@
 
 // --------- CONTEXTO DE USUARIO ---------
 
-// Básicamente se guardarán los datos de autenticación del usuario, por lo que nos dirigiremos a la carpeta context y dentro crearemos un componente AuthContext.jsx y dentro del mismo insertaremos código
+// Básicamente se guardarán los datos de autenticación del usuario, por lo que nos dirigiremos a la carpeta context y dentro crearemos un componente AuthContext.jsx y dentro del mismo insertaremos código, mayormente enfocado cone l AuthProvider para verificar que la autenticación salga correcta.
+// Una vez ya acabado todo, podemos visualizar que los registros están completos, sin embargo al actualizar la página estos se borran, más adelante se verá cómo evitar que estos sean borrados
+
+// Para mostrarle a las demás páginas que ya estamos autenticados, dentro del AuthContext creamos un hook useState llamado isAuthenticated con true o false para su verificación.
+
+// Primero en pages, dentro de RegisterPage.jsx crearemos código para redireccionar a /tasks una vez registrado
+
+// Ahora solo se hicieron validaciones rápidas en el registerPage para mostrar algunos errores del registro en pantalla, como las validaciones, pero hasta aorita mongoose nos sigue mostrando otros errores solo en consola, como por ejemplo en caso de regitrar un usuario repetido, pues no debería de mostrarse este error únicamente en consola
+// Para solucionar esto nos dirigimos al backend, dentro de controllers/authcontroller.js insertamos código, para iniciar este sería código orientado a poder visualizar el mensaje dentro de AxiosError/response/data/message en la consola de la web con la función de register para por ejemplo al insertar un email que ya existía. Ahora lo que se hará es dirigirnos al Client y dentro de AuthContext.jsx insertamos código, ahora ya hemos acabado ahora sí las validaciones que indican cuando el correo está mal escrito, o si la contraseña no tiene los caracteres especificados, etc.
+
+// ------------ FORMULARIO DE LOGIN ------------
