@@ -4,7 +4,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function RegisterPage() {
 
@@ -30,80 +30,89 @@ export default function RegisterPage() {
   });
 
   return (
-    <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
-      {
-        registerErrors.map((error, i)=> (
-          <div className='bg-red-500 p-2 text-white' key={i}>
-            { error }
-          </div>
-        ))
-      }
-      {/* // <div>RegisterPage</div>
-      // Se puedes manejar los eventos del formulario, para que cuando el usuario tipee se guarde en un estado o las propias validaciones del front, sin embargo ya existen librerías que se encargan de eso y nos evita tener que hacer todo por nuestra cuenta, para este caso utiizaremos un módulo llamado 'react hook form', el cuál se encarga de decirle a react que tenemos un formulario que se encarga tanto de manejar el cambio de estado, como de validaciones */}
-      <form 
-        onSubmit={onSubmit}
-      >
-        {/* <input type="text" name='username' /> */}
-        {/* '...' indica operador de progpagación, es decir que los atributos que tendrá la función se asignarán automáticamente, en vez de escribir todo de forma manual, es decir que para la función register se asigna automáticamente onChange, onBlur y ref
-        'register' sería una función proporcionada por react hook form que se utiliza para registrar un campo de entrada, permitiendo el control del estado de campo, la validación y la recolección de datos 
-        'username' vendría siendo el nombre del campo
-        'required: true' vendría siendo si es requerido dicho campo para así no permitir un estaod vacío */}
-        {/* Se vería como abajo sin el operador de progpagación '...', como podemos observar el código es más legible gracias al operador de propagación */}
-        {/* <input 
-              type="text" 
-              onChange={register('username', {required: true}).onChange}
-              onBlur={register('username', {required: true}).onBlur}
-              ref={register('username', {required: true}).ref}
-            /> 
-        */}
-        <input type="text"
-          { ...register('username', {required: true}) }
-          className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
-          placeholder='Username'
-        />
-
-        {/* errors.username verifica si se contiene algún error escrito dentro, mientras que los operadores && verifican true o false respecto a si se contiene algo en errors.username, es así como salta o no salta el mensaje de error */}
+    <div className='flex h-[calc(100vh-100px)] items-center justify-center'>
+      <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
         {
-          errors.username && (
-            <p className='text-red-500'>
-              Username is required
-            </p>
-          )
+          registerErrors.map((error, i)=> (
+            <div className='bg-red-500 p-2 text-white my-2' key={i}>
+              { error }
+            </div>
+          ))
         }
 
-        {/* <input type="email" name='email' /> */}
-        <input type="email"
-          { ...register('email', { required: true }) }
-          className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
-          placeholder='Email'
-        />
+        <h1 className='text-2x1 font-bold'>Register</h1>
 
-        {
-          errors.email && (
-            <p className='text-red-500'>
-              Email is required
-            </p>
-          )
-        }
+        {/* // <div>RegisterPage</div>
+        // Se puedes manejar los eventos del formulario, para que cuando el usuario tipee se guarde en un estado o las propias validaciones del front, sin embargo ya existen librerías que se encargan de eso y nos evita tener que hacer todo por nuestra cuenta, para este caso utiizaremos un módulo llamado 'react hook form', el cuál se encarga de decirle a react que tenemos un formulario que se encarga tanto de manejar el cambio de estado, como de validaciones */}
+        <form 
+          onSubmit={onSubmit}
+        >
+          {/* <input type="text" name='username' /> */}
+          {/* '...' indica operador de progpagación, es decir que los atributos que tendrá la función se asignarán automáticamente, en vez de escribir todo de forma manual, es decir que para la función register se asigna automáticamente onChange, onBlur y ref
+          'register' sería una función proporcionada por react hook form que se utiliza para registrar un campo de entrada, permitiendo el control del estado de campo, la validación y la recolección de datos 
+          'username' vendría siendo el nombre del campo
+          'required: true' vendría siendo si es requerido dicho campo para así no permitir un estaod vacío */}
+          {/* Se vería como abajo sin el operador de progpagación '...', como podemos observar el código es más legible gracias al operador de propagación */}
+          {/* <input 
+                type="text" 
+                onChange={register('username', {required: true}).onChange}
+                onBlur={register('username', {required: true}).onBlur}
+                ref={register('username', {required: true}).ref}
+              /> 
+          */}
+          <input type="text"
+            { ...register('username', {required: true}) }
+            className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
+            placeholder='Username'
+          />
 
-        <input type="password"
-          { ...register('password', { required: true }) }
-          className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
-          placeholder='Password'
-        />
+          {/* errors.username verifica si se contiene algún error escrito dentro, mientras que los operadores && verifican true o false respecto a si se contiene algo en errors.username, es así como salta o no salta el mensaje de error */}
+          {
+            errors.username && (
+              <p className='text-red-500'>
+                Username is required
+              </p>
+            )
+          }
 
-        {
-          errors.password && (
-            <p className='text-red-500'>
-              Password is required
-            </p>
-          )
-        }
+          {/* <input type="email" name='email' /> */}
+          <input type="email"
+            { ...register('email', { required: true }) }
+            className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
+            placeholder='Email'
+          />
 
-        <button type='submit'>
-          Register
-        </button>
-      </form>
+          {
+            errors.email && (
+              <p className='text-red-500'>
+                Email is required
+              </p>
+            )
+          }
+
+          <input type="password"
+            { ...register('password', { required: true }) }
+            className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
+            placeholder='Password'
+          />
+
+          {
+            errors.password && (
+              <p className='text-red-500'>
+                Password is required
+              </p>
+            )
+          }
+
+          <button type='submit'>
+            Register
+          </button>
+        </form>
+
+          <p className='flex gap-x-2 justify-between'>
+              Already have an account? <Link to='/login' className='text-sky-500'>Login</Link>
+          </p>
+      </div>
     </div>
   )
 };
