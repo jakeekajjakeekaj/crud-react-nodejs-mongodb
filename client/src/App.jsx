@@ -9,6 +9,7 @@ import TasksPage from './pages/TasksPage.jsx';
 import TaskFormPage from './pages/TaskFormPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import HomePage from './pages/HomePage.jsx';
+import ProtectedRoute from './ProtectedRoute.jsx';
 
 function App() {
   return (
@@ -18,10 +19,13 @@ function App() {
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
-          <Route path='/tasks' element={<TasksPage />} />
-          <Route path='/add-task' element={<TaskFormPage />} />
-          <Route path='/tasks/:id' element={<TaskFormPage />} />
-          <Route path='/profile' element={<ProfilePage />} />
+
+          <Route element={ <ProtectedRoute /> }>
+            <Route path='/tasks' element={<TasksPage />} />
+            <Route path='/add-task' element={<TaskFormPage />} />
+            <Route path='/tasks/:id' element={<TaskFormPage />} />
+            <Route path='/profile' element={<ProfilePage />} />
+          </Route>
         </Routes>
         {/* <div className='text-4x1 font-bold'>Hola Mundo</div> */}
       </BrowserRouter>

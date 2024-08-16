@@ -4,7 +4,8 @@ import {
   register, 
   login, 
   logout, 
-  profile 
+  profile,
+  verifyToken
 } from '../controllers/auth.controller.js';
 import { authRequired } from '../middlewares/validateToken.js';
 import { validateSchema } from '../middlewares/validator.middleware.js';
@@ -17,6 +18,8 @@ const router = Router();
 router.post('/register', validateSchema(registerSchema), register);
 router.post('/login', validateSchema(loginSchema), login);
 router.post('/logout', logout);
+
+router.get('/verify', verifyToken);
 
 // Al indicar 2 funciones, se indica que primero debe pasar por una función y después pasa a la otra
 router.get('/profile', authRequired, profile);

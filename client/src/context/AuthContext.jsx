@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, useEffect } from 'react';
-import { registerRequest, loginRequest } from '../api/auth.js';
+import { registerRequest, loginRequest, verifyTokenRequest } from '../api/auth.js';
+import Cookies from 'js-cookie';
 
 export const AuthContext = createContext();
 
@@ -16,6 +17,7 @@ export const AuthProvider = ({ children })=> {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   // Está en null porque no hay errores al inicio
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const signup = async (user)=> {
     try {
@@ -36,14 +38,17 @@ export const AuthProvider = ({ children })=> {
     try {
       const res = await loginRequest(user);
       console.log(res);
+      setIsAuthenticated(true);
+      setUser(res.data);
     } catch (error) {
       // console.log(error);
       // Array sería para los arreglos, esto se realiza de esta manera ya que el error no es recibido como objeto y nosotros esperamos recibirlo de esta manera debido a los métodos utilizados, por lo que de esta manera conseguirmos obtenerlo como arreglo
-      if (Array.isArray(error.response.data)) {
-        return setErrors(error.response.data);
-      }
+      console.log(error);
+      // if (Array.isArray(error.response.data)) {
+      //   return setErrors(error.response.data);
+      // }
       // setErrors(error.response.data);
-      setErrors([error.response.data.message]);
+      // setErrors([error.response.data.message]);
     }
   };
 
@@ -57,11 +62,44 @@ export const AuthProvider = ({ children })=> {
     }
   }, [errors])
 
+  useEffect(()=> {
+    async function checkLogin () {
+      const cookies = Cookies.get();
+      // console.log(cookies);
+      if (!cookies.token) {
+        setIsAuthenticated(false);
+        setLoading(false);
+        setUser(null);
+        return;
+      }
+      // console.log(cookies.token);
+      try {
+        const res = await verifyTokenRequest(cookies.token);
+        // console.log(res);
+        if(!res.data) {
+          setIsAuthenticated(false);
+          setLoading(false);
+          return;
+        }
+
+        setIsAuthenticated(true);
+        setUser(res.data);
+        setLoading(false);
+      } catch (error) {
+        setIsAuthenticated(false);
+        setUser(null);
+        setLoading(false);
+      }
+    }
+    checkLogin();
+  }, []);
+
   return (
     <AuthContext.Provider 
     value={{
       signup,
       signin,
+      loading,
       user,
       isAuthenticated,
       errors

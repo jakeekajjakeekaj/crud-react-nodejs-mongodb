@@ -18,6 +18,7 @@ const app = express();
 // Es para le manejo del CORS, como con el corsOptions, solo que este se conecta de forma sencilla y directa, admitiendo todo de este dominio, sin embargo es malo si queremos seguridad en nuestro CORS ya que esto al ser tan directo y sencillo, puede tener ciertas complicaicones de seguridad
 app.use(cors({
   origin: 'http://localhost:5173',
+  credentials: true
 }));
 
 // la configuración 'dev' es para que nos muestre un mensaje corto por consola
