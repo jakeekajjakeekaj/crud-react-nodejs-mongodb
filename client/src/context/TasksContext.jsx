@@ -1,7 +1,7 @@
 // Este componente es muy usado para compartir datos entre diferentes componentes sin tener que starlos compartiendo todos de forma manual
 
 import { createContext, useContext, useState } from 'react';
-import { createTaskRequest, getTasksRequests } from '../api/tasks.js';
+import { createTaskRequest, getTasksRequests, deleteTaskRequest } from '../api/tasks.js';
 
 const TaskContext = createContext();
 
@@ -35,11 +35,23 @@ export function TaskProvider({ children }) {
     console.log(res);
   }
 
+  const deleteTask = async (id)=> {
+    // const res = await deleteTaskRequest(id);
+    // console.log(res);
+    try {
+      const res = await deleteTaskRequest(id);
+      if(res.status === 204) setTasks(tasks.filter(task=> task._id != id));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <TaskContext.Provider value={{ 
       tasks,
       createTask,
       getTasks,
+      deleteTask,
     }}>
       { children }
     </TaskContext.Provider>

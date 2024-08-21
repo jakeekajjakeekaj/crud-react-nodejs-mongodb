@@ -241,3 +241,15 @@
 
 // ---------------- NAVBAR ----------------
 
+// Hasta este momento, a pesar de ya tener el enrutamiento y todo, todavía no tenemos ningún sistema de navegación para así viajar entre las distintas rutas.
+// Dentro de components creamos un Navbat.jsx y aparte agregamos este componente dentro de App.jsx, para que así aparezca en todas las páginas
+// Ahora modificamos el Navbar.jsx para que se vea mejor lo que es la navegación; una vez ifnalizado esto, ahora lo que hacemos es aprovechar el Contexto de Auth que ya se tiene dentro de lo que sería nuiestro Navbar, únicamente para revisar si se está autenticado o no el usuario, para así en caso de estar autenticado hacer desaparecer el login y el register y cambiarlo por add task y log out por ejemplo
+// Una vez finalizado esto, nos dirigiremos a nuestro AuthContext para así hacer una función que se encargue de hacerle un logout al usuario, una vez realizada la agregamos a nuestro return del Context y ahora solo toca usar esa función el AuthContext dentro de nuestro Navbar y listo.
+// Ahora al iniciar sesión primero nos parece Welcome User, pero nosotros quremos que nos aparezca el nombre del usuario, por lo que ahora lo que se hará es dentro del useAuth agregamos user, y ya solo queda agregarlo como user.username donde queremos que nos aparezca y listo
+
+// Ya tenemos todo lo funcional, pero vamos a mejorar los estilos del Navbar.jsx
+
+// ------------------- TASK DELETE -------------------
+
+// Ahora lo que haremos es mejorar el funcionamiento para que el usuario pueda administrar sus tareas
+// Por lo que en components crearemos un TaskCard.jsx y dentro del mismo comenzamos a escribir el código para hacerlo funcional y así insertar el componente dentro del TasksPage.jsx, una vez hayamos acabado lo visual, ahora sí comenzaremos con lo fucnional, es decir con el onClick por ejemplo, primero omenzamos con una priueba para que el onClick nos arroje un mensaje del task._id por consola, una vez ya realizado, ahora comenzamos con el TasksContext.jsx para así crear nuestra función para el deleteTask y listo, ya podemos eliminar las tareas, solo que ahora la interfaz no está actualizando por si sola, osea si se procesa la petición y la ejecución en nuestra DB, pero desde el front no se refleja el cambio a menos que refresquemos, para que se actualice solo, lo que hará es dirigirnos al TasksContext.jsx y dentro de la función de deleteTask agregamos código para que esto suceda

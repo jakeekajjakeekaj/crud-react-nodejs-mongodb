@@ -52,6 +52,12 @@ export const AuthProvider = ({ children })=> {
     }
   };
 
+  const logout = ()=> {
+    Cookies.remove('token');
+    setIsAuthenticated(false);
+    setUser(null);
+  }
+
   // Timer para los mensajes de error, es decir el tiempo que etará presente el anuncio de error en caso de haber alguno
   useEffect(()=> {
     if(errors.length > 0) {
@@ -99,6 +105,7 @@ export const AuthProvider = ({ children })=> {
     value={{
       signup,
       signin,
+      logout,
       loading,
       user,
       isAuthenticated,
