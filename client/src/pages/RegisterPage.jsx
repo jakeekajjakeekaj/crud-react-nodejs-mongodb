@@ -21,13 +21,13 @@ export default function RegisterPage() {
 
   // console.log(user);
 
-  useEffect(()=> {
-    if(isAuthenticated) navigate('/tasks');
-  }, [isAuthenticated]);
-
   const onSubmit = handleSubmit(async (values)=> {
     signup(values);
   });
+
+  useEffect(()=> {
+    if(isAuthenticated) navigate('/tasks');
+  }, [isAuthenticated]);
 
   return (
     <div className='flex h-[calc(100vh-100px)] items-center justify-center'>

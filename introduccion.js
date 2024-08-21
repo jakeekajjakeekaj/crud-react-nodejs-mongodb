@@ -234,3 +234,10 @@
 // Ahora del lado del back, dentro de auth.routes.js crearemos un router para el verify, el verifyToken vendrá desde auth.controller.js, y al modificar mayormente estos dos ya quedaría todo listo.
 
 // --------------- TASKS ---------------
+// Nos dirigimso al TaskFormPage.jsx y dentro del mismo escribimos el código para obtener un formulario
+// Una vez finalizado esto, nos dirigimos a la zona de context para crear un contexto llamado TasksContext.jsx y dentro escribimos código
+// Una vez finalizado, necesitaremos añadir los context, aquí supondremos que lo necesitaremos para todas las páginas por lo que el TaskProvider lo añadiremos en nuestra app.jsx como un componente que envuelva todo, una vez finalizado lo de TasksContex.jsx y el TaskFormPage.jsx, ahor alo que haremos será crear un archivo dentro de la carpeta api llamado tasks.js con el motivo de conectarnos con el backend, una vez realizado, ya podemos almacenar ahora si nuestra primer tarea en tasks/new, al guardarla ya se almacenaría en el backend, ahora creamos la función de getTasksRequests dentro igual de nuestro TasksContext.jsx para así obtener el mismo resultado que con el create, solo que ahora insertaremos código dentro del TasksPage.jsx ya que es en este componente donde corresponde, así mismo dentro del propio TasksPage crearemos un .map para así poder mostrar todas las tareas en pantalla y aparte son las correspondientes con el usuario
+// Ahora lo que se realizará es que una vez que quedemos logeados, nos dirigiremos al /tasks para así no tener que nosotros escribirlo manualmente, para esto dentro de LoginPage.jsx agregamos un useEffect después del submit, para así al logearnos y verificarlo con un isAuthenticated, que nos dirija con un navigate a /tasks
+
+// ---------------- NAVBAR ----------------
+
