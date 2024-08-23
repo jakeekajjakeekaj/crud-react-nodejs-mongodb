@@ -1,7 +1,17 @@
 // Este componente es muy usado para compartir datos entre diferentes componentes sin tener que starlos compartiendo todos de forma manual
 
-import { createContext, useContext, useState } from 'react';
-import { createTaskRequest, getTasksRequests, deleteTaskRequest } from '../api/tasks.js';
+import { 
+  createContext, 
+  useContext, 
+  useState
+} from 'react';
+import { 
+  createTaskRequest, 
+  getTasksRequests, 
+  deleteTaskRequest,
+  getTaskRequest,
+  updateTaskRequest
+} from '../api/tasks.js';
 
 const TaskContext = createContext();
 
@@ -26,14 +36,14 @@ export function TaskProvider({ children }) {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   // Función que nos permitirá guardar en el backend
   const createTask = async (task)=> {
     // console.log('task!');
     const res = await createTaskRequest(task);
     console.log(res);
-  }
+  };
 
   const deleteTask = async (id)=> {
     // const res = await deleteTaskRequest(id);
@@ -44,6 +54,25 @@ export function TaskProvider({ children }) {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const getTask = async (id)=> {
+    try {
+      const res = await getTaskRequest(id);
+      // console.log(res);
+      return res.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // Para este caso es el id de la tarea que se actualizará y el segundo valor serán los nuevos valores de las task
+  const updateTask = async (id, task)=> {
+    try {
+      await updateTaskRequest(id, task);
+    } catch(error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -52,6 +81,8 @@ export function TaskProvider({ children }) {
       createTask,
       getTasks,
       deleteTask,
+      getTask,
+      updateTask
     }}>
       { children }
     </TaskContext.Provider>

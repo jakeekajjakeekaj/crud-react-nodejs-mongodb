@@ -40,7 +40,7 @@ export default function RegisterPage() {
           ))
         }
 
-        <h1 className='text-2x1 font-bold'>Register</h1>
+        <h1 className='text-3xl font-bold my-2'>Register</h1>
 
         {/* // <div>RegisterPage</div>
         // Se puedes manejar los eventos del formulario, para que cuando el usuario tipee se guarde en un estado o las propias validaciones del front, sin embargo ya existen librerías que se encargan de eso y nos evita tener que hacer todo por nuestra cuenta, para este caso utiizaremos un módulo llamado 'react hook form', el cuál se encarga de decirle a react que tenemos un formulario que se encarga tanto de manejar el cambio de estado, como de validaciones */}
@@ -104,7 +104,9 @@ export default function RegisterPage() {
             )
           }
 
-          <button type='submit'>
+          <button type='submit'
+            className='bg-sky-500 text-white px-4 py-2 rounded-md my-2'
+          >
             Register
           </button>
         </form>
